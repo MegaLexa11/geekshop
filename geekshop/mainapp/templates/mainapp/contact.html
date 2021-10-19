@@ -4,7 +4,7 @@
 {% block menu %}
 	<div class="hero">
 		<div class="header clearfix">
-			<a href="index.html" class="logo"></a>
+			<a href="{% url 'index' %}" class="logo"></a>
 			<ul class="menu">
 				{% include 'mainapp/inc_main_menu.html' %}
 			</ul>

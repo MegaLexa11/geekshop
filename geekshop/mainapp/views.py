@@ -2,11 +2,17 @@ from django.shortcuts import render
 
 
 def main(request):
-    return render(request, 'mainapp/index.html')
+    context = {
+        'title': 'Главная'
+    }
+    return render(request, 'mainapp/index.html', context=context)
 
 
 def contact(request):
-    return render(request, 'mainapp/contact.html')
+    context = {
+        'title': 'Контакты'
+    }
+    return render(request, 'mainapp/contact.html', context=context)
 
 
 links_menu = [
@@ -36,7 +42,8 @@ links_menu = [
 def products(request):
 
     context = {
-        'links_menu': links_menu
+        'links_menu': links_menu,
+        'title': 'Продукты'
     }
     return render(request, 'mainapp/products.html', context=context)
 
@@ -44,7 +51,8 @@ def products(request):
 def products_home(request):
 
     context = {
-        'links_menu': links_menu
+        'links_menu': links_menu,
+        'title': 'Продукты для дома'
     }
     return render(request, 'mainapp/products.html', context=context)
 
@@ -52,7 +60,8 @@ def products_home(request):
 def products_office(request):
 
     context = {
-        'links_menu': links_menu
+        'links_menu': links_menu,
+        'title': 'Продукты для офиса'
     }
     return render(request, 'mainapp/products.html', context=context)
 
@@ -60,7 +69,8 @@ def products_office(request):
 def products_modern(request):
 
     context = {
-        'links_menu': links_menu
+        'links_menu': links_menu,
+        'title': 'Продукты модерн'
     }
     return render(request, 'mainapp/products.html', context=context)
 
@@ -68,6 +78,7 @@ def products_modern(request):
 def products_classic(request):
 
     context = {
-        'links_menu': links_menu
+        'links_menu': links_menu,
+        'title': 'Продукты классика'
     }
     return render(request, 'mainapp/products.html', context=context)
