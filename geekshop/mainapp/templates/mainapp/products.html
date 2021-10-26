@@ -6,7 +6,7 @@
 		<div class="header clearfix">
 			<a href="{% url 'index' %}" class="logo"></a>
 			<ul class="menu">
-				{% include 'mainapp/inc_main_menu.html' %}
+				{% include 'mainapp/includes/inc_main_menu.html' %}
 			</ul>
 			<a href="#" class="search"></a>
 			<a href="#" class="basket"></a>
@@ -17,7 +17,7 @@
 {% block content %}
 	<div class="details">
 		<div class="links clearfix">
-			{% include 'mainapp/inc_categories_menu.html' %}
+			{% include 'mainapp/includes/inc_categories_menu.html' %}
 		</div>
 
 		<div class="details-products">
