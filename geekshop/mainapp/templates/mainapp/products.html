@@ -19,23 +19,6 @@
 				<div class="slider-product">
 					<img src='/media/{{ hot_product.image }}' alt="{{ hot_product.name }}" class="tab-img">
 				</div>
-{#				<div class="slider-control">#}
-{#					<div class="block">#}
-{#						<a href="#"><img src={% static "img/controll.jpg" %}>#}
-{#							<div class="text"></div>#}
-{#						</a>#}
-{#					</div>#}
-{#					<div class="block">#}
-{#						<a href="#"><img src={% static "img/controll1.jpg" %}>#}
-{#							<div class="text"></div>#}
-{#						</a>#}
-{#					</div>#}
-{#					<div class="block">#}
-{#						<a href="#"><img src={% static "img/controll2.jpg" %}>#}
-{#							<div class="text"></div>#}
-{#						</a>#}
-{#					</div>#}
-{#				</div>#}
 			</div>
 
 			<div class="description">
@@ -60,7 +43,7 @@
 				{% for product in same_products %}
                     {% if product.pk != hot_product.pk %}
                         <div class="block">
-                            <a href="{% url 'basket:add' product.pk %}">
+                            <a href="{% url 'products:product' product.pk %}">
                                 <img src='/media/{{ product.image }}' alt="{{ product.name }}" class="tab-img">
                                 <div class="text">
                                     <img src={% static "img/icon-hover.png" %}>
