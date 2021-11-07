@@ -22,24 +22,23 @@ def contact(request):
 
 def get_basket(user):
     if user.is_authenticated:
-        return sum(list(Basket.objects.filter(user=user).values_list('quantity', flat=True)))
+        return Basket.objects.filter()
     return 0
 
 
-def get_cost(user):
-    if user.is_authenticated:
-        cost = 0
-        for basket in Basket.objects.filter(user=user):
-            cost += basket.product.price * basket.quantity
-        return cost
-    return 0
+def links():
+    return ProductCategory.objects.all()
+
+
+def hot_product():
+    return random.sample(list(Product.objects.all()), 1)[0]
+
+
+def same_hot_products():
+    return Product.objects.filter(category__pk=hot_product().pk).order_by('price').exclude(pk=hot_product().pk)
 
 
 def products(request, pk=None):
-    basket = get_basket(request.user)
-    cost = get_cost(request.user)
-
-    links_menu = ProductCategory.objects.all()
 
     if pk:
         if pk == 0:
@@ -53,26 +52,33 @@ def products(request, pk=None):
             products = Product.objects.filter(category__pk=pk).order_by('price')
 
         context = {
-            'links_menu': links_menu,
+            'links_menu': links(),
             'title': 'Продукты',
             'products': products,
             'category': category,
-            'basket': basket,
-            'cost': cost,
+            'basket': get_basket(user=request.user)
         }
 
         return render(request, 'mainapp/products_list.html', context)
 
-    hot_product = random.sample(list(Product.objects.all()), 1)[0]
-    same_products = Product.objects.filter(category=hot_product.category)
-
     context = {
-        'links_menu': links_menu,
+        'links_menu': links(),
         'title': 'Продукты',
-        'hot_product': hot_product,
-        'same_products': same_products,
-        'basket': basket,
-        'cost': cost,
+        'hot_product': hot_product(),
+        'same_products': same_hot_products(),
+        'basket': get_basket(user=request.user)
     }
 
     return render(request, 'mainapp/products.html', context=context)
+
+
+def product(request, pk):
+
+    context = {
+        'title': 'Продукты',
+        'product': get_object_or_404(Product, pk=pk),
+        'basket': get_basket(user=request.user),
+        'links_menu': links(),
+    }
+
+    return render(request, 'mainapp/product.html', context=context)

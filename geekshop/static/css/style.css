@@ -520,9 +520,6 @@ html, body {
 .category-products .block a img {
 	float: left;
 }
-
-
-
 .category-products .block {
 	float: left;
 	margin-right: 30px;
@@ -1588,6 +1585,7 @@ td:first-child {
 	font-weight: 300;
 	line-height: 48px;
 	text-align: center;
+    margin-top: 20px;
 }
 .description .price span {
 	color:  #212121;
@@ -1630,7 +1628,6 @@ td:first-child {
 	font-weight: 300;
 	line-height: 24px;
 	text-align: left;
-    width: auto;
 }
 .description-text p {
 	margin-bottom: 0.5em;
@@ -1731,4 +1728,8 @@ td:first-child {
 .user-avatar {
 	margin: 0px auto;
 	max-width: 100%;
+}
+
+.cost-out {
+    font-size: 12px;
 }
