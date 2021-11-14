@@ -3,7 +3,7 @@
 
 {% block content %}
     <form class="log-form" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
-        <img src="/media/{{ user.avatar }}" alt="{{ user.username }}" class="user-avatar">
+        <img src="{{ user.image|media_folder_users }}" alt="{{ user.username }}" class="user-avatar">
         {% csrf_token %}
         {{ edit_form.as_p }}
         <br>

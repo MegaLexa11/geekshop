@@ -1,7 +1,7 @@
 {% for item in basket_items %}
     <div class="basket_record">
         <a href="{% url 'products:product' item.product.pk %}">
-            <img src="/media/{{ item.product.image }}"
+            <img src="{{ item.product.image|media_folder_products }}"
                  alt="{{ item.product.short_desc }}">
         </a>
         <span class="category_name">{{ item.product.category.name }}</span>

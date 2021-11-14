@@ -1,5 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% load my_tags %}
 
 {% block menu %}
     <div class="hero-white">
@@ -26,7 +27,7 @@
                 {% for product in products %}
                     <div class="block">
                         <a href="{% url 'products:product' product.pk %}">
-                            <img src="/media/{{ product.image }}" alt="product" class="tab-img">
+                            <img src="{{ product.image|media_folder_products }}" alt="product" class="tab-img">
                             <div class="text">
                                 <img src="{% static 'img/icon-hover.png' %}" alt="hover">
                                 <h4>{{ product.name }}</h4>
@@ -35,9 +36,23 @@
                         </a>
                     </div>
                 {% endfor %}
-
             </div>
         </div>
+
+        <div class="page-btn">
+            {% if products.has_previous %}
+                <a href="{% url 'products:page' category.pk products.previous_page_number %}">
+                    <<
+                </a>
+            {% endif %}
+            страница {{ products.number }} из {{ products.paginator.num_pages }}
+            {% if products.has_next %}
+                <a href="{% url 'products:page' category.pk products.next_page_number %}">
+                    >>
+                </a>
+            {% endif %}
+        </div>
+
     </div>
 
     <div class="clr"></div>
