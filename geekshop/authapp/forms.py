@@ -1,6 +1,11 @@
+from datetime import datetime
+import hashlib
+
+import pytz
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
 from authapp.models import ShopUser
 from django import forms
+from django.conf import settings
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -42,6 +47,15 @@ class ShopUserRegisterForm(UserCreationForm):
             if user.email == data:
                 raise forms.ValidationError('Такой Email уже занят!')
         return data
+
+    def save(self, *args, **kwargs):
+        user = super().save(*args, **kwargs)
+        user.is_active = False
+        user.activation_key = hashlib.sha1(user.email.encode('utf-8')).hexdigest()
+        user.activation_key_expired = datetime.now(pytz.timezone(settings.TIME_ZONE))
+
+        user.save()
+        return user
 
 
 class ShopUserEditForm(UserChangeForm):
