@@ -24,14 +24,14 @@
             </div>
             <div class="category-products clearfix">
 
-                {% for product in products %}
+                {% for object in object_list %}
                     <div class="block">
-                        <a href="{% url 'products:product' product.pk %}">
-                            <img src="{{ product.image|media_folder_products }}" alt="product" class="tab-img">
+                        <a href="{% url 'products:product' object.pk %}">
+                            <img src="{{ object.image|media_folder_products }}" alt="product" class="tab-img">
                             <div class="text">
                                 <img src="{% static 'img/icon-hover.png' %}" alt="hover">
-                                <h4>{{ product.name }}</h4>
-                                <p>{{ product.description }}</p>
+                                <h4>{{ object.name }}</h4>
+                                <p>{{ object.description }}</p>
                             </div>
                         </a>
                     </div>
@@ -40,14 +40,14 @@
         </div>
 
         <div class="page-btn">
-            {% if products.has_previous %}
-                <a href="{% url 'products:page' category.pk products.previous_page_number %}">
+            {% if page_obj.has_previous %}
+                <a href="{% url 'mainapp:categories' category.pk %}?page={{ page_obj.previous_page_number }}">
                     <<
                 </a>
             {% endif %}
-            страница {{ products.number }} из {{ products.paginator.num_pages }}
-            {% if products.has_next %}
-                <a href="{% url 'products:page' category.pk products.next_page_number %}">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            {% if page_obj.has_next %}
+                <a href="{% url 'mainapp:categories' category.pk %}?page={{ page_obj.next_page_number }}">
                     >>
                 </a>
             {% endif %}

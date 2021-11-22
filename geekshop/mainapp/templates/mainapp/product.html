@@ -18,18 +18,18 @@
 		<div class="details-products">
 			<div class="details-slider">
 				<div class="slider-product">
-					<img src='{{ product.image|media_folder_products }}' alt="{{ product.name }}" class="tab-img">
+					<img src='{{ object.image|media_folder_products }}' alt="{{ object.name }}" class="tab-img">
 				</div>
 			</div>
 
 			<div class="description">
-				<h3 class="big-bold">{{ product.name }}</h3>
-				<p class="price">{{ product.price|floatformat:2 }}<span>руб</span></p>
-				<a href="{% url 'basket:add' product.pk %}" class="red-button">
+				<h3 class="big-bold">{{ object.name }}</h3>
+				<p class="price">{{ object.price|floatformat:2 }}<span>руб</span></p>
+				<a href="{% url 'basket:add' object.pk %}" class="red-button">
 					заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
 				</a>
 				<div class="description-text">
-					<p>{{ product.description }}</p>
+					<p>{{ object.description }}</p>
 				</div>
 			</div>
 		</div>

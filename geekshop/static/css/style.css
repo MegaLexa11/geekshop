@@ -1739,6 +1739,15 @@ td:first-child {
     text-align: center;
 }
 
+.page-btn a {
+    text-decoration: none;
+    color: grey;
+}
+
+.page-btn a:hover {
+    font-weight: bold;
+}
+
 .admin_cat_img {
     width: 300px;
     height: 300px;
