@@ -16,3 +16,4 @@ def media_folder_users(string):
     if not string:
         string = 'users_avatars/default.jpg'
     return f'{settings.MEDIA_URL}{string}'
+
