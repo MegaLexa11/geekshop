@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from mainapp import views as mainapp
 
 urlpatterns = [
+    path('', include('social_django.urls', namespace='social')),
     path('', mainapp.main, name='index'),
     path('contact/', mainapp.contact, name='contact'),
     path('products/', include('mainapp.urls', namespace='products')),

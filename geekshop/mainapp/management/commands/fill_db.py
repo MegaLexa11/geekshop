@@ -26,4 +26,3 @@ class Command(BaseCommand):
             Product.objects.create(**product)
 
         ShopUser.objects.create_superuser('django', password='geekbrains', age=22)
-

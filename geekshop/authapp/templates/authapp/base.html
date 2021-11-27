@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-	<title>
+    <title>
         {% block title %}
             {{ title|title }}
         {% endblock %}
@@ -17,34 +17,43 @@
 
     {% block js %}
 
-    {%  endblock %}
+    {% endblock %}
 
 </head>
 <body>
-   <div class="container">
-        <div class="login">
-            <div class="h2 text-center head">
-                {{ title|title }}
-            </div>
+<div class="container">
+    <div class="login">
+        <div class="h2 text-center head">
+            {{ title|title }}
+        </div>
 
-            {% block content %}
+        {% block content %}
 
-            {% endblock %}
-
+        {% endblock %}
+        {% if request.resolver_match.namespace == 'auth' %}
             <hr>
             <ul class="alter-els">
                 {% if request.resolver_match.url_name == 'login' %}
                     <li><a href="{% url 'auth:register' %}" class="alter-btn">Регистрация</a></li>
                 {% elif request.resolver_match.url_name == 'register' %}
                     <li><a href="{% url 'auth:login' %}" class="alter-btn">Вход</a></li>
-                {% else %}
+                {% endif %}
+                {% if not request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/" class="alter-btn">
+                            Вход через VK
+                        </a>
+                    </li>
                 {% endif %}
                 <li>
-                    <a href="{% url 'index' %}" class="alter-btn">На главную</a>
+                    <a href="{% url 'index' %}" class="alter-btn">
+                        На главную
+                    </a>
                 </li>
             </ul>
+        {% endif %}
 
-        </div>
-	</div>
+    </div>
+</div>
 </body>
 </html>
