@@ -9,7 +9,6 @@ from django.conf import settings
 
 class ShopUser(AbstractUser):
     avatar = models.ImageField(verbose_name='аватар', upload_to='users_avatars', blank=True)
-    avatar_url = models.CharField(max_length=128, null=True, blank=True)
     age = models.PositiveIntegerField(verbose_name='возраст', default=21)
     is_active = models.BooleanField(default=True)
 
