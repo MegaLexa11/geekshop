@@ -4,7 +4,7 @@
 
 {% block content %}
     <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
-        <img src="{% if user.avatar_url %}{{ user.avatar_url }}{% else %}{{ user.avatar|media_folder_users }}{% endif %}" alt="{{ user.username }}" class="user-avatar">
+        <img src="{{ user.avatar|media_folder_users }}" alt="{{ user.username }}" class="user-avatar">
         {% csrf_token %}
         {{ edit_form.as_p }}
         {{ edit_profile_form.as_p }}

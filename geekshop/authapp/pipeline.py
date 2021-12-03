@@ -3,6 +3,7 @@ import requests
 from datetime import datetime
 from django.utils import timezone
 from social_core.exceptions import AuthForbidden
+from django.conf import settings
 
 from authapp.models import ShopUserProfile
 
@@ -48,6 +49,10 @@ def save_user_profile(backend, user, response, *args, **kwargs):
             user.age = age
 
     if data['photo_200_orig']:
-        user.avatar_url = data['photo_200_orig']
+        photo_data = requests.get(data['photo_200_orig'])
+        photo_path = f'{settings.MEDIA_ROOT}/users_avatars/{user.pk}.jpeg'
+        with open(photo_path, 'wb') as photo_file:
+            photo_file.write(photo_data.content)
+        user.avatar = photo_path
 
     user.save()
