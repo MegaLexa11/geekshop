@@ -5,8 +5,14 @@
     <div class="basket_list">
         {% include 'basketapp/includes/inc_basket_list.html' %}
     </div>
-    <button class="btn btn-round">
-        <a href="{% url 'index' %}">на главную</a>
-    </button>
+    <div class="alter-els">
+        <button class="btn btn-round">
+            <a href="{% url 'index' %}">на главную</a>
+        </button>
+
+        <button class="btn btn-round">
+            <a href="{% url 'order:create' %}">Оформить заказ</a>
+        </button>
+    </div>
 
 {% endblock %}

@@ -5,6 +5,7 @@ from mainapp.models import Product
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from ordersapp.signals import *
 
 
 @login_required
