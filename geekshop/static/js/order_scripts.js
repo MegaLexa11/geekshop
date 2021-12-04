@@ -63,19 +63,40 @@ window.onload = function () {
         orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
     }
 
-    $('.order_form select').change(function() {
-        let target = event.target
+    $('.order_form').on('change', 'select', function() {
+        let target = event.target;
         orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
-        _quantity = parseInt($('input[name="orderitems-' + orderitem_num + '-quantity"]').val());
-        _price = parseFloat($('.orderitems-' + orderitem_num + '-price').text().replace(',', '.'));
-        quantity_arr[orderitem_num] = _quantity;
-        if (_price) {
-            price_arr[orderitem_num] = _price;
-        } else {
-            price_arr[orderitem_num] = 0;
+        let product_id = target.options[target.selectedIndex].value;
+        if (product_id) {
+            $.ajax({
+                url: '/orders/product/price/' + product_id,
+                success: function (data) {
+                    if (data.price) {
+                        price_arr[orderitem_num] = parseFloat(data.price);
+                        if (isNaN(quantity_arr[orderitem_num])) {
+                            quantity_arr[orderitem_num] = 0;
+                        }
+
+                        let price_string = '<span>' + data.price.toString().replace('.', ',') + '</span> руб.';
+                        let current_tr = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
+                        current_tr.find('td:eq(2)').html(price_string);
+
+                        orderTotalUpdate()
+                    }
+                }
+            })
+        }
+    })
+
+    function orderTotalUpdate() {
+        order_total_quantity = 0;
+        order_total_cost = 0;
+        for (let i=0; i < TOTAL_FORMS; i++) {
+            order_total_quantity += quantity_arr[i];
+            order_total_cost += price_arr[i] * quantity_arr[i];
         }
 
-        console.log(target)
-        console.log(price_arr)
-    })
+        $('.order_total_quantity').html(order_total_quantity.toString());
+        $('.order_total_cost').html(Number(order_total_cost.toFixed(2)).toString());
+    }
 }
