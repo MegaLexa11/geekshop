@@ -1,0 +1,44 @@
+[
+  {
+    "category": "дом",
+    "name": "домашний стул",
+    "image": "products_images/chair.jpg",
+    "price": 100,
+    "quantity": 1
+  },
+  {
+    "category": "офис",
+    "name": "офисный шкаф",
+    "image": "products_images/cabinet.jpg",
+    "price": 111,
+    "quantity": 4
+  },
+  {
+    "category": "дом",
+    "name": "домашний стол",
+    "image": "products_images/table.jpg",
+    "price": 345,
+    "quantity": 3
+  },
+  {
+    "category": "модерн",
+    "name": "современный диван",
+    "image": "products_images/sofa.jpg",
+    "price": 9,
+    "quantity": 15
+  },
+  {
+    "category": "классика",
+    "name": "классический предмет",
+    "image": "products_images/product-1.jpg",
+    "price": 144,
+    "quantity": 7
+  },
+  {
+    "category": "офис",
+    "name": "офисный предмет",
+    "image": "products_images/product-2.jpg",
+    "price": 198,
+    "quantity": 9
+  }
+]
